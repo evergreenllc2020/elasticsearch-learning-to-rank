@@ -36,10 +36,11 @@ if __name__ == "__main__":
     from utils import elastic_connection, INDEX_NAME
 
     es = elastic_connection(timeout=1000)
-    model = "test_6"
+    model = "test_8"
     if len(argv) > 2:
         model = argv[2]
-    results = es.search(index=INDEX_NAME, doc_type='movie', body=ltr_query(argv[1], model))
+    ##results = es.search(index=INDEX_NAME, doc_type='movie', body=ltr_query(argv[1], model))
+    results = es.search(index=INDEX_NAME, body=ltr_query(argv[1], model))
     for result in results['hits']['hits']:
         Logger.logger.info(result['_source']['title'])
 
